@@ -1,0 +1,110 @@
+ext {
+    // Android sdk and version
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 33
+    androidCompileSdkVersion = 33
+    appVersionCode = 1
+    appVersionName = '1.0'
+
+    // Core dependencies
+    kotlinVersion = '1.7.20'
+    coreKtxVersion = '1.9.0'
+    appCompatVersion = '1.5.1'
+    materialVersion = '1.7.0'
+    constraintLayoutVersion = '2.1.4'
+
+    // Activity KTX & Fragment KTX for viewModels() dependencies
+    activityKtxVersion = '1.6.1'
+    fragmentKtxVersion = '1.5.4'
+
+    // sdp && ssp for ui units dependencies
+    sdpVersion = '1.1.0'
+    sspVersion = '1.1.0'
+
+    // Navigation component dependencies
+    navFragmentKtxVersion = '2.5.3'
+    navUiKtxVersion = '2.5.3'
+
+    // Coroutines dependencies
+    coroutineCoreVersion = '1.6.4'
+    coroutineAndroidVersion = '1.6.4'
+    coroutinePlayServiceVersion = '1.1.1'
+
+    //Glide dependencies
+    glideVersion = '4.14.2'
+
+    // Dagger - Hilt dependencies
+    hiltAndroidVersion = '2.44'
+    hiltNavigationFragment = '1.0.0'
+    hiltVersion = '1.0.0-alpha02'
+
+    // Timber logging dependencies
+    timberVersion = '5.0.1'
+
+    // Common dependencies
+    kotlinDependencies = [
+            coreKtx: "androidx.core:core-ktx:$coreKtxVersion",
+    ]
+
+    // sdp & ssp dependencies
+    sdpSspDependencies = [
+            sdp: "com.intuit.sdp:sdp-android:$sdpVersion",
+            ssp: "com.intuit.ssp:ssp-android:$sspVersion",
+    ]
+
+    hiltDependencies = [
+            hiltAndroid : "com.google.dagger:hilt-android:$hiltAndroidVersion",
+//            hiltAndroidKapt: "com.google.dagger:hilt-android-compiler:$hiltAndroidVersion",
+//            hiltViewModel  : "androidx.hilt:hilt-lifecycle-viewmodel:$hiltVersion",
+            hiltFragment: "androidx.hilt:hilt-navigation-fragment:$hiltNavigationFragment",
+//            hiltKapt       : "androidx.hilt:hilt-compiler:hiltAndroidVersion",
+            hiltKapt    : "com.google.dagger:hilt-compiler:$hiltAndroidVersion",
+    ]
+
+    coroutinesDependencies = [
+            coroutineCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineCoreVersion",
+            coroutineAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineAndroidVersion",
+    ]
+
+    glideDependencies = [
+            glide    : "com.github.bumptech.glide:glide:$glideVersion",
+            glideKapt: "com.github.bumptech.glide:compiler:$glideVersion"
+    ]
+
+    timberDependencies = [
+            timber: "com.jakewharton.timber:timber:$timberVersion"
+    ]
+
+    uiModuleDependencies = [
+            coreKtx              : kotlinDependencies.coreKtx,
+            appCompat            : "androidx.appcompat:appcompat:$appCompatVersion",
+            material             : "com.google.android.material:material:$materialVersion",
+            constraint           : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:$navFragmentKtxVersion",
+            navigationUiKtx      : "androidx.navigation:navigation-ui-ktx:$navUiKtxVersion",
+            activityKtx          : "androidx.activity:activity-ktx:$activityKtxVersion",
+            fragmentKtx          : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            sdp                  : sdpSspDependencies.sdp,
+            ssp                  : sdpSspDependencies.ssp,
+            // Dagger-Hilt
+            daggerHilt           : [hiltDependencies.hiltAndroid,
+//                                    hiltDependencies.hiltViewModel,
+                                    hiltDependencies.hiltFragment],
+            daggerHiltKapt       : hiltDependencies.hiltKapt,
+            coroutines           : [coroutinesDependencies.coroutineCore,
+                                    coroutinesDependencies.coroutineAndroid],
+            glide                : glideDependencies.glide,
+            glideKapt            : glideDependencies.glideKapt,
+            timber               : timberDependencies.timber
+
+    ]
+
+    dataModuleDependencies = []
+
+    domainModuleDependencies = []
+
+    presentationModuleDependencies = []
+
+    remoteModuleDependencies = []
+
+}
