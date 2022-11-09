@@ -41,6 +41,11 @@ ext {
     // Timber logging dependencies
     timberVersion = '5.0.1'
 
+    // Network dependencies
+    okhttpVersion = '5.0.0-alpha.9'
+    retrofitVersion = '2.9.0'
+    gsonVersion = '2.10'
+
     // Common dependencies
     kotlinDependencies = [
             coreKtx: "androidx.core:core-ktx:$coreKtxVersion",
@@ -75,6 +80,14 @@ ext {
             timber: "com.jakewharton.timber:timber:$timberVersion"
     ]
 
+    networkDependencies = [
+            retrofit         : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofitConverter: "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+//            okhttp           : "com.squareup.okhttp3:okhttp:$okhttpVersion",
+            okhttpInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttpVersion",
+            gson             : "com.google.code.gson:gson:$gsonVersion"
+    ]
+
     uiModuleDependencies = [
             coreKtx              : kotlinDependencies.coreKtx,
             appCompat            : "androidx.appcompat:appcompat:$appCompatVersion",
@@ -105,6 +118,12 @@ ext {
 
     presentationModuleDependencies = []
 
-    remoteModuleDependencies = []
+    remoteModuleDependencies = [
+            network: [networkDependencies.retrofit,
+                      networkDependencies.retrofitConverter,
+//                      networkDependencies.okhttp,
+                      networkDependencies.okhttpInterceptor,
+                      networkDependencies.gson],
+    ]
 
 }

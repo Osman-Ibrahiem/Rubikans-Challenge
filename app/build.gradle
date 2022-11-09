@@ -37,6 +37,13 @@ android {
 
 dependencies {
 
+    implementation project(':remote')
+    implementation project(':data')
+    implementation project(':domain')
+    implementation project(':presentation')
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
     implementation uiModuleDependencies.coreKtx
     implementation uiModuleDependencies.appCompat
     implementation uiModuleDependencies.material
