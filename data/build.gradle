@@ -9,5 +9,12 @@ java {
 
 dependencies {
 
+    //Modules
+    implementation project(":domain")
+
+    // Coroutines
     implementation dataModuleDependencies.coroutine
+
+    // Hilt
+    implementation remoteModuleDependencies.hiltCore
 }

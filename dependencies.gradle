@@ -115,6 +115,7 @@ ext {
     ]
 
     dataModuleDependencies = [
+            hiltCore : hiltDependencies.hiltCore,
             coroutine: coroutinesDependencies.coroutineCore,
     ]
 

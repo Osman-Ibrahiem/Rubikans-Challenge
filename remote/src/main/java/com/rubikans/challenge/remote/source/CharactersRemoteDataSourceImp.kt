@@ -1,7 +1,7 @@
-package com.rubikans.challenge.remote.dataSource
+package com.rubikans.challenge.remote.source
 
-import com.rubikans.challenge.data.dataSource.CharactersRemoteDataSource
 import com.rubikans.challenge.data.models.CharactersListEntity
+import com.rubikans.challenge.data.source.CharactersRemoteDataSource
 import com.rubikans.challenge.remote.api.CharacterService
 import com.rubikans.challenge.remote.mappers.CharactersListEntityMapper
 import kotlinx.coroutines.flow.Flow

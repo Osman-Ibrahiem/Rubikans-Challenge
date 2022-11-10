@@ -2,7 +2,6 @@ package com.rubikans.challenge.remote.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.rubikans.challenge.remote.api.CharacterService
 import com.rubikans.challenge.remote.di.qualifiers.AppBuildType
 import com.rubikans.challenge.remote.di.qualifiers.AppRemoteUrl
 import dagger.Module
@@ -21,12 +20,6 @@ import javax.inject.Singleton
 object ServiceFactory {
 
     private const val OK_HTTP_TIMEOUT = 60L
-
-    @Provides
-    @Singleton
-    fun provideCharacterService(
-        retrofit: Retrofit,
-    ): CharacterService = retrofit.create(CharacterService::class.java)
 
     @Provides
     @Singleton
