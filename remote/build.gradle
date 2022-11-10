@@ -4,6 +4,15 @@ plugins {
 
 dependencies {
 
+    //Modules
+    implementation project(":data")
+
     // Network (Retrofit, OkHttp Interceptor, GSon)
     implementation remoteModuleDependencies.network
+
+    // Coroutines
+    implementation remoteModuleDependencies.coroutine
+
+    // Hilt
+    implementation remoteModuleDependencies.hiltCore
 }

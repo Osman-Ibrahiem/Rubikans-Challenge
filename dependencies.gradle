@@ -34,6 +34,7 @@ ext {
     glideVersion = '4.14.2'
 
     // Dagger - Hilt dependencies
+    hiltCoreVersion = '2.44'
     hiltAndroidVersion = '2.44'
     hiltNavigationFragment = '1.0.0'
     hiltVersion = '1.0.0-alpha02'
@@ -58,6 +59,7 @@ ext {
     ]
 
     hiltDependencies = [
+            hiltCore    : "com.google.dagger:hilt-core:$hiltCoreVersion",
             hiltAndroid : "com.google.dagger:hilt-android:$hiltAndroidVersion",
 //            hiltAndroidKapt: "com.google.dagger:hilt-android-compiler:$hiltAndroidVersion",
 //            hiltViewModel  : "androidx.hilt:hilt-lifecycle-viewmodel:$hiltVersion",
@@ -112,18 +114,22 @@ ext {
 
     ]
 
-    dataModuleDependencies = []
+    dataModuleDependencies = [
+            coroutine: coroutinesDependencies.coroutineCore,
+    ]
 
     domainModuleDependencies = []
 
     presentationModuleDependencies = []
 
     remoteModuleDependencies = [
-            network: [networkDependencies.retrofit,
-                      networkDependencies.retrofitConverter,
+            hiltCore : hiltDependencies.hiltCore,
+            network  : [networkDependencies.retrofit,
+                        networkDependencies.retrofitConverter,
 //                      networkDependencies.okhttp,
-                      networkDependencies.okhttpInterceptor,
-                      networkDependencies.gson],
+                        networkDependencies.okhttpInterceptor,
+                        networkDependencies.gson],
+            coroutine: coroutinesDependencies.coroutineCore,
     ]
 
 }
