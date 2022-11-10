@@ -15,14 +15,16 @@ class CharactersCacheDataSourceImp @Inject constructor(
 ) : CharactersCacheDataSource {
 
     override suspend fun getCharacters(): Flow<CharactersListEntity> = flow {
-        val characters = characterDao.getCharacters().map(characterCacheMapper::mapFromCached)
-        emit(CharactersListEntity(
-            page = 1,
-            perPage = characters.size,
-            total = characters.size,
-            totalPages = 1,
-            characters = characters
-        ))
+        characterDao.getCharacters().collect { cacheList ->
+            val characters = cacheList.map(characterCacheMapper::mapFromCached)
+            emit(CharactersListEntity(
+                page = 1,
+                perPage = characters.size,
+                total = characters.size,
+                totalPages = 1,
+                characters = characters
+            ))
+        }
     }
 
     override suspend fun saveCharacters(listCharacters: List<CharacterEntity>) {

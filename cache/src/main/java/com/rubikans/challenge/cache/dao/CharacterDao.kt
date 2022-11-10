@@ -5,12 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.rubikans.challenge.cache.models.CharacterCacheEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharacterDao {
 
     @Query("SELECT * FROM characters")
-    fun getCharacters(): List<CharacterCacheEntity>
+    fun getCharacters(): Flow<List<CharacterCacheEntity>>
 
     @Query("DELETE FROM characters")
     fun clearCharacters()
