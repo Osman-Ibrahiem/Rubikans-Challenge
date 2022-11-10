@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Rubikans Challenge</string>
+    <string name="character_details">Character Details</string>
 </resources>

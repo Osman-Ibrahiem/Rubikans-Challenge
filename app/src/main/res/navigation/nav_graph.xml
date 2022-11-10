@@ -8,6 +8,7 @@
     <fragment
         android:id="@+id/characterListFragment"
         android:name="com.rubikans.challenge.ui.characterslist.CharacterListFragment"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_character_list">
         <action
             android:id="@+id/action_to_characterDetails"
@@ -17,6 +18,7 @@
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.rubikans.challenge.ui.characterDetails.CharacterDetailsFragment"
+        android:label="@string/character_details"
         tools:layout="@layout/fragment_character_details" />
 
 </navigation>
