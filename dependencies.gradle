@@ -163,6 +163,7 @@ ext {
             room    : [roomDependencies.roomRuntime,
                        roomDependencies.roomKtx],
             roomKapt: roomDependencies.roomCompilerKapt,
+            gson    : "com.google.code.gson:gson:$gsonVersion",
     ]
 
 }

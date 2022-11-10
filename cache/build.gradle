@@ -38,6 +38,7 @@ dependencies {
     // Hilt
     implementation cacheModuleDependencies.hiltCore
     // Room
+    implementation cacheModuleDependencies.gson
     implementation cacheModuleDependencies.room
     kapt cacheModuleDependencies.roomKapt
 }
