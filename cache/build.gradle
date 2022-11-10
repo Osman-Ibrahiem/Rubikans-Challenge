@@ -33,4 +33,11 @@ android {
 
 dependencies {
 
+    // Kotlin Core
+    implementation cacheModuleDependencies.coreKtx
+    // Hilt
+    implementation cacheModuleDependencies.hiltCore
+    // Room
+    implementation cacheModuleDependencies.room
+    kapt cacheModuleDependencies.roomKapt
 }
