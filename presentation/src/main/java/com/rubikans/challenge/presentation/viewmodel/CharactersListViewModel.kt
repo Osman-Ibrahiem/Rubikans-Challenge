@@ -1,10 +1,7 @@
 package com.rubikans.challenge.presentation.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rubikans.challenge.domain.interactor.GetCharactersListUseCase
-import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.presentation.utils.ExceptionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -15,16 +12,24 @@ import javax.inject.Inject
 @HiltViewModel
 class CharactersListViewModel @Inject internal constructor(
     private val getCharactersListUseCase: GetCharactersListUseCase,
-) : BaseViewModel() {
+) : BaseViewModel<CharacterState>() {
 
+    private var state: CharacterState = CharacterState.Init
+        private set(value) {
+            field = value
+            publishState(value)
+        }
+
+    override val stateObservable: MutableLiveData<CharacterState> by lazy {
+        MutableLiveData<CharacterState>()
+    }
 
     private var getCharactersJob: Job? = null
-    private val _charactersList = MutableLiveData<List<Character>>()
-    val charactersList: LiveData<List<Character>> get() = _charactersList
 
     override val coroutineExceptionHandler: CoroutineExceptionHandler
         get() = CoroutineExceptionHandler { _, throwable ->
             val message = ExceptionHandler.parse(throwable)
+            state = CharacterState.Error(message)
         }
 
     init {
@@ -37,15 +42,15 @@ class CharactersListViewModel @Inject internal constructor(
     }
 
     private fun getCharacters() {
+        state = CharacterState.Loading
         getCharactersJob = launchCoroutine {
             loadCharacters()
         }
     }
 
     private suspend fun loadCharacters() {
-        getCharactersListUseCase(Unit).collect {
-            Log.d("", it.toString())
-            _charactersList.value = it.characters
+        getCharactersListUseCase(Unit).collect { charactersList ->
+            state = CharacterState.Success(charactersList)
         }
     }
 }
