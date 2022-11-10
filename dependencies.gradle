@@ -119,9 +119,19 @@ ext {
             coroutine: coroutinesDependencies.coroutineCore,
     ]
 
-    domainModuleDependencies = []
+    domainModuleDependencies = [
+            hiltCore : hiltDependencies.hiltCore,
+            coroutine: coroutinesDependencies.coroutineCore,
+    ]
 
-    presentationModuleDependencies = []
+    presentationModuleDependencies = [
+            coreKtx     : kotlinDependencies.coreKtx,
+            hiltCore    : hiltDependencies.hiltCore,
+            hiltFragment: hiltDependencies.hiltFragment,
+            coroutine   : coroutinesDependencies.coroutineCore,
+            activityKtx : "androidx.activity:activity-ktx:$activityKtxVersion",
+            fragmentKtx : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+    ]
 
     remoteModuleDependencies = [
             hiltCore : hiltDependencies.hiltCore,

@@ -16,5 +16,5 @@ dependencies {
     implementation dataModuleDependencies.coroutine
 
     // Hilt
-    implementation remoteModuleDependencies.hiltCore
+    implementation dataModuleDependencies.hiltCore
 }

@@ -10,8 +10,8 @@ java {
 dependencies {
 
     // Coroutines
-    implementation remoteModuleDependencies.coroutine
+    implementation domainModuleDependencies.coroutine
 
     // Hilt
-    implementation remoteModuleDependencies.hiltCore
+    implementation domainModuleDependencies.hiltCore
 }
