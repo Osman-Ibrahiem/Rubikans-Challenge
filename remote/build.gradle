@@ -7,7 +7,7 @@ dependencies {
     //Modules
     implementation project(":data")
 
-    // Network (Retrofit, OkHttp Interceptor, GSon)
+    // Network (Gson)
     implementation remoteModuleDependencies.network
 
     // Coroutines

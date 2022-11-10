@@ -21,9 +21,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", '"https://reqres.in"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"https://reqres.in"'
         }
     }
     compileOptions {
@@ -62,6 +66,8 @@ dependencies {
     // Glide
     implementation uiModuleDependencies.glide
     kapt uiModuleDependencies.glideKapt
+    // Network (Retrofit, OkHttp Interceptor, Gson)
+    implementation uiModuleDependencies.network
     // Timber
     implementation uiModuleDependencies.timber
 }

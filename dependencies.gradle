@@ -110,6 +110,11 @@ ext {
                                     coroutinesDependencies.coroutineAndroid],
             glide                : glideDependencies.glide,
             glideKapt            : glideDependencies.glideKapt,
+            network              : [networkDependencies.retrofit,
+                                    networkDependencies.retrofitConverter,
+//                                    networkDependencies.okhttp,
+                                    networkDependencies.okhttpInterceptor,
+                                    networkDependencies.gson],
             timber               : timberDependencies.timber
 
     ]
@@ -125,20 +130,20 @@ ext {
     ]
 
     presentationModuleDependencies = [
-            coreKtx     : kotlinDependencies.coreKtx,
-            hiltCore    : hiltDependencies.hiltCore,
-            hiltFragment: hiltDependencies.hiltFragment,
-            coroutine   : coroutinesDependencies.coroutineCore,
-            activityKtx : "androidx.activity:activity-ktx:$activityKtxVersion",
-            fragmentKtx : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            coreKtx       : kotlinDependencies.coreKtx,
+            // Dagger-Hilt
+            daggerHilt    : [hiltDependencies.hiltAndroid,
+//                                    hiltDependencies.hiltViewModel,
+                             hiltDependencies.hiltFragment],
+            daggerHiltKapt: hiltDependencies.hiltKapt,
+            coroutine     : coroutinesDependencies.coroutineCore,
+            activityKtx   : "androidx.activity:activity-ktx:$activityKtxVersion",
+            fragmentKtx   : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
     ]
 
     remoteModuleDependencies = [
             hiltCore : hiltDependencies.hiltCore,
             network  : [networkDependencies.retrofit,
-                        networkDependencies.retrofitConverter,
-//                      networkDependencies.okhttp,
-                        networkDependencies.okhttpInterceptor,
                         networkDependencies.gson],
             coroutine: coroutinesDependencies.coroutineCore,
     ]

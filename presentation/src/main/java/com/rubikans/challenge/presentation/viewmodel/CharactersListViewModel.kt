@@ -1,7 +1,10 @@
 package com.rubikans.challenge.presentation.viewmodel
 
 import android.util.Log
-import com.rubikans.challenge.domain.interactor.GetCharactersUseCase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.rubikans.challenge.domain.interactor.GetCharactersListUseCase
+import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.presentation.utils.ExceptionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -10,12 +13,14 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-internal class CharactersViewModel @Inject internal constructor(
-    private val getCharactersUseCase: GetCharactersUseCase,
+class CharactersListViewModel @Inject internal constructor(
+    private val getCharactersListUseCase: GetCharactersListUseCase,
 ) : BaseViewModel() {
 
 
     private var getCharactersJob: Job? = null
+    private val _charactersList = MutableLiveData<List<Character>>()
+    val charactersList: LiveData<List<Character>> get() = _charactersList
 
     override val coroutineExceptionHandler: CoroutineExceptionHandler
         get() = CoroutineExceptionHandler { _, throwable ->
@@ -38,8 +43,9 @@ internal class CharactersViewModel @Inject internal constructor(
     }
 
     private suspend fun loadCharacters() {
-        getCharactersUseCase(Unit).collect {
+        getCharactersListUseCase(Unit).collect {
             Log.d("", it.toString())
+            _charactersList.value = it.characters
         }
     }
 }

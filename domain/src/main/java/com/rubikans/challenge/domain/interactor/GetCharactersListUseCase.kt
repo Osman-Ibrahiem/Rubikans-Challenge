@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
-class GetCharactersUseCase @Inject constructor(
+class GetCharactersListUseCase @Inject constructor(
     private val characterRepository: CharacterRepository,
 ) : BaseUseCase<Unit, Flow<CharactersList>> {
 

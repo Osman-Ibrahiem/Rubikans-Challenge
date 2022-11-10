@@ -1,4 +1,4 @@
-package com.rubikans.challenge.data.di
+package com.rubikans.challenge.di
 
 import com.rubikans.challenge.data.repository.CharacterRepositoryImp
 import com.rubikans.challenge.domain.repository.CharacterRepository

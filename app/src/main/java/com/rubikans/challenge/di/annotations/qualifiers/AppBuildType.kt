@@ -1,4 +1,4 @@
-package com.rubikans.challenge.remote.di.qualifiers
+package com.rubikans.challenge.di.annotations.qualifiers
 
 import javax.inject.Qualifier
 

@@ -9,7 +9,7 @@ internal object ExceptionHandler {
     @StringRes
     fun parse(t: Throwable): Int {
         return when (t) {
-            is UnknownHostException -> R.string.error_check_internet_connection
+            is UnknownHostException, is java.net.SocketException -> R.string.error_check_internet_connection
             else -> R.string.error_oops_error_occured
         }
     }

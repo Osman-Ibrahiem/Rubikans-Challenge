@@ -42,8 +42,8 @@ dependencies {
     implementation presentationModuleDependencies.coroutine
 
     // Hilt
-    implementation presentationModuleDependencies.hiltCore
-    implementation presentationModuleDependencies.hiltFragment
+    implementation presentationModuleDependencies.daggerHilt
+    kapt presentationModuleDependencies.daggerHiltKapt
 
     // LifeCycle
     implementation presentationModuleDependencies.activityKtx

@@ -1,8 +1,11 @@
 package com.rubikans.challenge.di
 
+import android.app.Application
+import android.content.Context
 import com.rubikans.challenge.BuildConfig
-import com.rubikans.challenge.remote.di.qualifiers.AppBuildType
-import com.rubikans.challenge.remote.di.qualifiers.AppRemoteUrl
+import com.rubikans.challenge.di.annotations.qualifiers.AppBuildType
+import com.rubikans.challenge.di.annotations.qualifiers.AppContext
+import com.rubikans.challenge.di.annotations.qualifiers.AppRemoteUrl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,10 +16,16 @@ import dagger.hilt.components.SingletonComponent
 @Module
 class ApplicationModule {
 
+    @AppContext
+    @Provides
+    fun context(application: Application): Context {
+        return application.applicationContext
+    }
+
     @AppRemoteUrl
     @Provides
     fun provideBaseURl(): String {
-        return "https://reqres.in/api/"
+        return BuildConfig.BASE_URL + "/api/"
     }
 
     @AppBuildType

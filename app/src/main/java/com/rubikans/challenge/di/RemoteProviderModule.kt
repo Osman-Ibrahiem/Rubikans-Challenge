@@ -1,4 +1,4 @@
-package com.rubikans.challenge.remote.di
+package com.rubikans.challenge.di
 
 import com.rubikans.challenge.remote.api.CharacterService
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.rubikans.challenge.domain.di
+package com.rubikans.challenge.di
 
 import dagger.Module
 import dagger.hilt.InstallIn
