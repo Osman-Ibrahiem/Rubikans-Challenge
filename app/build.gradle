@@ -45,6 +45,7 @@ android {
 dependencies {
 
     implementation project(':remote')
+    implementation project(':cache')
     implementation project(':data')
     implementation project(':domain')
     implementation project(':presentation')
@@ -71,6 +72,9 @@ dependencies {
     kapt uiModuleDependencies.glideKapt
     // Network (Retrofit, OkHttp Interceptor, Gson)
     implementation uiModuleDependencies.network
+    // Room
+    implementation uiModuleDependencies.room
+    kapt uiModuleDependencies.roomKapt
     // Timber
     implementation uiModuleDependencies.timber
 }

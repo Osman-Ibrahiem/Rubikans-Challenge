@@ -5,13 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rubikans.challenge.cache.dao.CharacterDao
-import com.rubikans.challenge.cache.models.CharacterCache
+import com.rubikans.challenge.cache.models.CharacterCacheEntity
 import com.rubikans.challenge.cache.utils.CacheConstants
 import com.rubikans.challenge.cache.utils.Migrations
 import javax.inject.Inject
 
 @Database(
-    entities = [CharacterCache::class],
+    entities = [CharacterCacheEntity::class],
     version = Migrations.DB_VERSION
 )
 abstract class CharactersDataBase @Inject constructor() : RoomDatabase() {

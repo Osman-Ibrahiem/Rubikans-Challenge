@@ -1,13 +1,13 @@
 package com.rubikans.challenge.cache.mapper
 
-import com.rubikans.challenge.cache.models.CharacterCache
+import com.rubikans.challenge.cache.models.CharacterCacheEntity
 import com.rubikans.challenge.data.models.CharacterEntity
 import javax.inject.Inject
 
 class CharacterCacheMapper @Inject constructor(
-) : CacheMapper<CharacterCache, CharacterEntity> {
+) : CacheMapper<CharacterCacheEntity, CharacterEntity> {
 
-    override fun mapFromCached(type: CharacterCache): CharacterEntity {
+    override fun mapFromCached(type: CharacterCacheEntity): CharacterEntity {
         return CharacterEntity(
             id = type.id,
             email = type.email,
@@ -17,8 +17,8 @@ class CharacterCacheMapper @Inject constructor(
         )
     }
 
-    override fun mapToCached(type: CharacterEntity): CharacterCache {
-        return CharacterCache(
+    override fun mapToCached(type: CharacterEntity): CharacterCacheEntity {
+        return CharacterCacheEntity(
             id = type.id,
             email = type.email,
             firstName = type.firstName,

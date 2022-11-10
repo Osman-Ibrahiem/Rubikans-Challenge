@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import com.rubikans.challenge.cache.utils.CacheConstants
 
 @Entity(tableName = CacheConstants.CHARACTER_TABLE_NAME)
-data class CharacterCache(
+data class CharacterCacheEntity(
     @PrimaryKey
     @SerializedName("id")
     var id: Int = 0,

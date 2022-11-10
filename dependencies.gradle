@@ -124,6 +124,9 @@ ext {
 //                                    networkDependencies.okhttp,
                                     networkDependencies.okhttpInterceptor,
                                     networkDependencies.gson],
+            room                 : [roomDependencies.roomRuntime,
+                                    roomDependencies.roomKtx],
+            roomKapt             : roomDependencies.roomCompilerKapt,
             timber               : timberDependencies.timber
 
     ]
