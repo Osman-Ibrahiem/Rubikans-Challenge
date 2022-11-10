@@ -8,6 +8,6 @@ interface CharactersCacheDataSource {
 
     suspend fun getCharacters(): Flow<CharactersListEntity>
 
-    suspend fun saveCharacters(listCharacters: List<CharacterEntity>)
+    suspend fun saveCharacters(listCharacters: List<CharacterEntity>): Flow<Long>
 
 }

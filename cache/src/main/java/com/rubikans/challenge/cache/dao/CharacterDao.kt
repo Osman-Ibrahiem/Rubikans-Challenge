@@ -20,5 +20,5 @@ interface CharacterDao {
     fun addCharacter(character: CharacterCacheEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCharacters(characters: List<CharacterCacheEntity>)
+    fun addCharacters(characters: List<CharacterCacheEntity>): Long
 }

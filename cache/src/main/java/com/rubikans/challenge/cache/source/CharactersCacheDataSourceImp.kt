@@ -27,10 +27,10 @@ class CharactersCacheDataSourceImp @Inject constructor(
         }
     }
 
-    override suspend fun saveCharacters(listCharacters: List<CharacterEntity>) {
+    override suspend fun saveCharacters(listCharacters: List<CharacterEntity>): Flow<Long> = flow {
         val count =
             characterDao.addCharacters(listCharacters.map(characterCacheMapper::mapToCached))
 //        characterDao.setLastCacheTime(System.currentTimeMillis())
-        return count
+        emit(count)
     }
 }
