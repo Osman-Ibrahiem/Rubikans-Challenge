@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CharactersCacheDataSource {
 
-    suspend fun getCharacters(): Flow<CharactersListEntity>
+    suspend fun getCharacters(): CharactersListEntity
 
-    suspend fun saveCharacters(listCharacters: List<CharacterEntity>): Flow<Long>
+    suspend fun saveCharacters(listCharacters: List<CharacterEntity>)
 
 }

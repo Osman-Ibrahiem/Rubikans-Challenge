@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface CharacterDao {
 
     @Query("SELECT * FROM characters")
-    fun getCharacters(): Flow<List<CharacterCacheEntity>>
+    fun getCharacters(): List<CharacterCacheEntity>
 
     @Query("DELETE FROM characters")
     fun clearCharacters()
@@ -20,5 +20,5 @@ interface CharacterDao {
     fun addCharacter(character: CharacterCacheEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCharacters(characters: List<CharacterCacheEntity>): Long
+    fun addCharacters(characters: List<CharacterCacheEntity>)
 }

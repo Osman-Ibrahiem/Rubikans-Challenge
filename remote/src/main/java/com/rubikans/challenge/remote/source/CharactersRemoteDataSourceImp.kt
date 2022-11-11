@@ -16,11 +16,11 @@ class CharactersRemoteDataSourceImp @Inject constructor(
     override suspend fun getCharacters(
         page: Int,
         pageSize: Int,
-    ): Flow<CharactersListEntity> = flow {
+    ) :CharactersListEntity {
         val characters = characterService.getCharacters(
             page = page,
             perPage = pageSize,
         )
-        emit(characterListEntityMapper.mapFromModel(characters))
+        return characterListEntityMapper.mapFromModel(characters)
     }
 }

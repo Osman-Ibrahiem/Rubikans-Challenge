@@ -12,7 +12,8 @@ import javax.inject.Inject
 
 @Database(
     entities = [CharacterCacheEntity::class],
-    version = Migrations.DB_VERSION
+    version = Migrations.DB_VERSION,
+    exportSchema = false,
 )
 abstract class CharactersDataBase @Inject constructor() : RoomDatabase() {
 

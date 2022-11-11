@@ -16,7 +16,7 @@ class CharacterRepositoryImp @Inject constructor(
 ) : CharacterRepository {
 
     override suspend fun getCharacters(): Flow<CharactersList> = flow {
-        remoteDataSource.getCharacters().collect { entities ->
+        remoteDataSource.getCharacters().let { entities ->
             cacheDataSource.saveCharacters(entities.characters)
             emit(charactersListMapper.mapFromEntity(entities))
         }
