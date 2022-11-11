@@ -15,7 +15,7 @@ import com.rubikans.challenge.extension.observe
 import com.rubikans.challenge.extension.showSnackBar
 import com.rubikans.challenge.presentation.utils.Resource
 import com.rubikans.challenge.presentation.viewmodel.CharactersListViewModel
-import com.rubikans.challenge.ui.core.CharacterAdapter
+import com.rubikans.challenge.ui.adapters.CharacterAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.rubikans.challenge.ui.core
+package com.rubikans.challenge.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -39,8 +39,9 @@ class CharacterAdapter @Inject constructor(
         override fun bind(item: Character, position: Int) {
             binding.apply {
                 textViewCharacterName.text = item.fullName
+                textViewEmail.text = item.email
                 glide.load(item.avatar).into(imageViewCharacter)
-                root.setOnClickListener {
+                cardView.setOnClickListener {
                     onItemClickListener(item)
                 }
             }

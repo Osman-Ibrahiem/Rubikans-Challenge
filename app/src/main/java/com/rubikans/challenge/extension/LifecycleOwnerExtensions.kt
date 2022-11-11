@@ -3,7 +3,6 @@ package com.rubikans.challenge.extension
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 
 /**
  * Adds the given observer to the observers list within the lifespan of the given
@@ -15,12 +14,9 @@ import androidx.lifecycle.Observer
  * @see LiveData.observe
  */
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(
-        this,
-        Observer {
-            it?.let { t -> observer(t) }
-        }
-    )
+    liveData.observe(this) {
+        it?.let { t -> observer(t) }
+    }
 }
 
 /**
@@ -33,10 +29,7 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
  * @see MutableLiveData.observe
  */
 fun <T> LifecycleOwner.observe(liveData: MutableLiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(
-        this,
-        Observer {
-            it?.let { t -> observer(t) }
-        }
-    )
+    liveData.observe(this) {
+        it?.let { t -> observer(t) }
+    }
 }
