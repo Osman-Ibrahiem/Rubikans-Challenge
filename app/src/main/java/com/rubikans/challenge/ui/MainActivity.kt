@@ -14,6 +14,8 @@ import com.rubikans.challenge.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -50,7 +52,10 @@ class MainActivity : AppCompatActivity() {
             if (actionView is ToggleThemeCheckBox) {
                 actionView.isChecked = themeUtils.isDarkTheme(this@MainActivity)
                 actionView.setOnCheckedChangeListener { _, isChecked ->
-                    themeUtils.setNightMode(isChecked, DELAY_TO_APPLY_THEME)
+                    activityScope.launch {
+                        themeUtils.setNightMode(isChecked)
+                        delay(DELAY_TO_APPLY_THEME)
+                    }
                 }
             }
         }

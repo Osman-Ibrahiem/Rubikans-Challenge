@@ -2,8 +2,6 @@ package com.rubikans.challenge.core.theme
 
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
 import javax.inject.Inject
 
@@ -14,18 +12,13 @@ class ThemeUtilsImp @Inject constructor() : ThemeUtils {
 
     override fun isLightTheme(context: Context) = !isDarkTheme(context)
 
-    override fun setNightMode(forceNight: Boolean, delay: Long) {
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                AppCompatDelegate.setDefaultNightMode(
-                    if (forceNight) {
-                        AppCompatDelegate.MODE_NIGHT_YES
-                    } else {
-                        AppCompatDelegate.MODE_NIGHT_NO
-                    }
-                )
-            },
-            delay
+    override fun setNightMode(nightMode: Boolean) {
+        AppCompatDelegate.setDefaultNightMode(
+            if (nightMode) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
         )
     }
 }

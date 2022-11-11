@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.RequestManager
 import com.rubikans.challenge.databinding.FragmentCharacterDetailsBinding
 import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.extension.observe
@@ -15,6 +16,7 @@ import com.rubikans.challenge.presentation.utils.Resource
 import com.rubikans.challenge.presentation.viewmodel.CharacterDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CharacterDetailsFragment : Fragment() {
@@ -24,6 +26,9 @@ class CharacterDetailsFragment : Fragment() {
     private val args: CharacterDetailsFragmentArgs by navArgs()
 
     private val viewModel: CharacterDetailViewModel by viewModels()
+
+    @Inject
+    lateinit var glide: RequestManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +49,10 @@ class CharacterDetailsFragment : Fragment() {
         when (result.status) {
             Resource.Status.SUCCESS -> {
                 result.data?.let {
-                    binding.textViewCharacterName.text = it.fullName
+                    binding.apply {
+                        textViewCharacterName.text = it.fullName
+                        glide.load(it.avatar).into(imageViewCharacter)
+                    }
                 }
             }
             Resource.Status.ERROR -> {
