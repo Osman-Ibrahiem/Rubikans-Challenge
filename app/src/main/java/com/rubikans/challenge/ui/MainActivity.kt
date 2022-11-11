@@ -9,13 +9,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.rubikans.challenge.R
 import com.rubikans.challenge.core.theme.ThemeUtils
-import com.rubikans.challenge.core.theme.ToggleThemeCheckBox
 import com.rubikans.challenge.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,24 +44,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-        menu.findItem(R.id.menu_toggle_theme).apply {
-            val actionView = this.actionView
-            if (actionView is ToggleThemeCheckBox) {
-                actionView.isChecked = themeUtils.isDarkTheme(this@MainActivity)
-                actionView.setOnCheckedChangeListener { _, isChecked ->
-                    activityScope.launch {
-                        themeUtils.setNightMode(isChecked)
-                        delay(DELAY_TO_APPLY_THEME)
-                    }
-                }
-            }
-        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) return navController.navigateUp()
-        return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            android.R.id.home -> navController.navigateUp()
+            R.id.settingsFragment -> true.also { navController.navigate(item.itemId) }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onNavigateUp(): Boolean {

@@ -2,7 +2,7 @@ package com.rubikans.challenge.di.cache
 
 import android.content.Context
 import com.rubikans.challenge.cache.database.CharactersDataBase
-import com.rubikans.challenge.cache.utils.PreferencesHelper
+import com.rubikans.challenge.cache.utils.CachePreferencesHelper
 import com.rubikans.challenge.di.annotations.qualifiers.AppContext
 import dagger.Module
 import dagger.Provides
@@ -26,7 +26,7 @@ object DataBaseModule {
     @Singleton
     fun providePreferenceHelper(
         @AppContext context: Context,
-    ): PreferencesHelper {
-        return PreferencesHelper(context)
+    ): CachePreferencesHelper {
+        return CachePreferencesHelper(context)
     }
 }

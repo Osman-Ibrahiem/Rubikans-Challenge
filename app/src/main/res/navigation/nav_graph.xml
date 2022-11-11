@@ -25,4 +25,10 @@
             app:argType="integer" />
     </fragment>
 
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.rubikans.challenge.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>
