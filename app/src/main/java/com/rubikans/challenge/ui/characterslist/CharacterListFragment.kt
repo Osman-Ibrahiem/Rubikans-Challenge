@@ -10,7 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rubikans.challenge.databinding.FragmentCharacterListBinding
-import com.rubikans.challenge.presentation.viewmodel.CharacterState
+import com.rubikans.challenge.domain.model.CharactersList
+import com.rubikans.challenge.extension.observe
+import com.rubikans.challenge.extension.showSnackBar
+import com.rubikans.challenge.presentation.utils.Resource
 import com.rubikans.challenge.presentation.viewmodel.CharactersListViewModel
 import com.rubikans.challenge.ui.core.CharacterAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +42,7 @@ class CharacterListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setObservers()
+        observe(viewModel.characterList, ::onViewStateChange)
         setupRecyclerView()
         characterAdapter.setItemClickListener { character ->
             findNavController().navigate(CharacterListFragmentDirections.actionToCharacterDetails(
@@ -53,29 +56,23 @@ class CharacterListFragment : Fragment() {
         layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun setObservers() {
-        viewModel.stateObservable.observe(viewLifecycleOwner) { characterState ->
-            updateView(characterState)
-        }
-    }
-
-    private fun updateView(characterState: CharacterState) {
-        when (characterState) {
-            is CharacterState.Success -> {
+    private fun onViewStateChange(result: Resource<CharactersList>) {
+        when (result.status) {
+            Resource.Status.SUCCESS -> {
                 binding.recyclerViewCharacters.isVisible = true
                 binding.progressBarCharacters.isVisible = false
-                characterAdapter.list = characterState.characters.characters
+                characterAdapter.list = result.data?.characters ?: ArrayList()
             }
-            is CharacterState.Error -> {
-//                showSnackBar(binding.rootView, getString(characterState.message), true)
+            Resource.Status.ERROR -> {
+                showSnackBar(binding.rootView, result.message ?: "", true)
                 binding.recyclerViewCharacters.isVisible = false
                 binding.progressBarCharacters.isVisible = false
             }
-            CharacterState.Init -> {
+            Resource.Status.INIT -> {
                 binding.recyclerViewCharacters.isVisible = false
                 binding.progressBarCharacters.isVisible = false
             }
-            CharacterState.Loading -> {
+            Resource.Status.LOADING -> {
                 binding.recyclerViewCharacters.isVisible = false
                 binding.progressBarCharacters.isVisible = true
             }

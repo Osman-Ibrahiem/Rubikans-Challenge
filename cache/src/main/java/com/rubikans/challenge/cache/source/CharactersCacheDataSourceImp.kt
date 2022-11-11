@@ -26,4 +26,8 @@ class CharactersCacheDataSourceImp @Inject constructor(
     override suspend fun saveCharacters(listCharacters: List<CharacterEntity>) {
         characterDao.addCharacters(listCharacters.map(characterCacheMapper::mapToCached))
     }
+
+    override suspend fun saveCharacter(character: CharacterEntity) {
+        characterDao.addCharacter(characterCacheMapper.mapToCached(character))
+    }
 }

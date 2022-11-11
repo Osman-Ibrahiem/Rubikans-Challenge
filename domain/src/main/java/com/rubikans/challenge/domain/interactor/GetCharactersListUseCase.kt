@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class GetCharactersListUseCase @Inject constructor(
     private val characterRepository: CharacterRepository,
-) : BaseUseCase<Unit, Flow<CharactersList>> {
+) : BaseUseCase<Int, Flow<CharactersList>> {
 
-    override suspend operator fun invoke(params: Unit) = characterRepository.getCharacters()
+    override suspend operator fun invoke(params: Int) = characterRepository.getCharacters(params)
 
 }

@@ -5,14 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 
-abstract class BaseViewModel<S> : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
-    abstract val stateObservable: MutableLiveData<S>
     private val job: Job = Job()
-
-    protected open fun publishState(state: S) {
-        stateObservable.postValue(state)
-    }
 
     abstract val coroutineExceptionHandler: CoroutineExceptionHandler
 
