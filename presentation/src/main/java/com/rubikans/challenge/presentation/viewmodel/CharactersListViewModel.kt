@@ -5,7 +5,6 @@ import com.rubikans.challenge.domain.interactor.GetCharactersListUseCase
 import com.rubikans.challenge.presentation.utils.ExceptionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Job
 import javax.inject.Inject
 
 
@@ -24,8 +23,6 @@ class CharactersListViewModel @Inject internal constructor(
         MutableLiveData<CharacterState>()
     }
 
-    private var getCharactersJob: Job? = null
-
     override val coroutineExceptionHandler: CoroutineExceptionHandler
         get() = CoroutineExceptionHandler { _, throwable ->
             val message = ExceptionHandler.parse(throwable)
@@ -36,14 +33,9 @@ class CharactersListViewModel @Inject internal constructor(
         getCharacters()
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        getCharactersJob?.cancel()
-    }
-
     private fun getCharacters() {
         state = CharacterState.Loading
-        getCharactersJob = launchCoroutine {
+        launchCoroutineIO {
             loadCharacters()
         }
     }
