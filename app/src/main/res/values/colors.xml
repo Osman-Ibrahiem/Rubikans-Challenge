@@ -17,6 +17,7 @@
     <color name="gradient_end">#2B438E</color>
     <color name="gradient_center">#4C3C7C</color>
     <color name="gradient_start">#583A75</color>
+    <color name="sun_flower">#D99100</color>
 
 
 </resources>

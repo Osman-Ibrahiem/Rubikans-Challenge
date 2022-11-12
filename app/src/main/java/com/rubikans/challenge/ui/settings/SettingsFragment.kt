@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rubikans.challenge.core.theme.ThemeUtils
 import com.rubikans.challenge.databinding.FragmentSettingsBinding
 import com.rubikans.challenge.domain.model.Settings
 import com.rubikans.challenge.extension.observe
@@ -28,6 +29,9 @@ class SettingsFragment : Fragment() {
     @Inject
     lateinit var settingsAdapter: SettingsAdapter
 
+    @Inject
+    lateinit var themeUtils: ThemeUtils
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +44,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.settings, ::onViewStateChange)
+        observe(viewModel.nightMode, ::onViewStateChangeNightMode)
         setupRecyclerView()
         viewModel.getSettings()
     }
@@ -72,6 +77,18 @@ class SettingsFragment : Fragment() {
             }
             Resource.Status.INIT -> {
 
+            }
+        }
+    }
+
+    private fun onViewStateChangeNightMode(result: Resource<Boolean>) {
+        when (result.status) {
+            Resource.Status.SUCCESS -> {
+                result.data?.let {
+                    themeUtils.setNightMode(it)
+                }
+            }
+            else -> {
             }
         }
     }

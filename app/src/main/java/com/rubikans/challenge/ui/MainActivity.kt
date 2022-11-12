@@ -18,10 +18,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        private const val DELAY_TO_APPLY_THEME = 1000L
-    }
-
     private lateinit var binding: ActivityMainBinding
     private val navController: NavController by lazy {
         val navHostFragment =
