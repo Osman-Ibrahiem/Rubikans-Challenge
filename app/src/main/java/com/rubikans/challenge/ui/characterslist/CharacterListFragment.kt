@@ -1,7 +1,12 @@
 package com.rubikans.challenge.ui.characterslist
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rubikans.challenge.R
 import com.rubikans.challenge.databinding.FragmentCharacterListBinding
 import com.rubikans.challenge.domain.model.Character
+import com.rubikans.challenge.extension.onQueryTextChanged
 import com.rubikans.challenge.presentation.viewmodel.CharactersListViewModel
 import com.rubikans.challenge.ui.base.BaseFragment
 import com.rubikans.challenge.ui.characterslist.adapters.CharacterAdapter
@@ -26,8 +32,11 @@ class CharacterListFragment :
     @Inject
     lateinit var characterAdapter: CharacterAdapter
 
+    var searchView: SearchView? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        installFilterMenu()
 
         initRecyclerView()
         characterAdapter.setItemClickListener { character ->
@@ -71,7 +80,7 @@ class CharacterListFragment :
 
             val error = throwable.message ?: "Error"
             Timber.e(error)
-                handleErrorMessage(error)
+            handleErrorMessage(error)
 
 
 //            viewBinding.recyclerViewCharacters.isVisible = false
@@ -79,8 +88,52 @@ class CharacterListFragment :
 
         viewModel.characterList.observe(viewLifecycleOwner) { characters: List<Character>? ->
 //            viewBinding.recyclerViewCharacters.isVisible = true
-            characterAdapter.list = characters ?: ArrayList()
+            characterAdapter.fullList = characters ?: ArrayList()
         }
     }
 
+    private fun installFilterMenu() {
+        activity?.addMenuProvider(menuProvider)
+
+        viewModel.searchQuery.observe(viewLifecycleOwner) {
+            characterAdapter.filter = it
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        searchView?.let {
+            if (!it.isIconified) {
+                it.isIconified = true
+            }
+            it.setOnQueryTextListener(null)
+        }
+        activity?.removeMenuProvider(menuProvider)
+    }
+
+    private val menuProvider = object : MenuProvider {
+
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.search_menu, menu)
+
+            val searchItem: MenuItem? = menu.findItem(R.id.action_search)
+            searchView = searchItem?.actionView as? SearchView
+
+            val pendingQuery = viewModel.searchQuery.value
+            if (pendingQuery != null && pendingQuery.isNotEmpty()) {
+                searchItem?.expandActionView()
+                searchView?.setQuery(pendingQuery, false)
+            }
+
+            searchView?.onQueryTextChanged {
+                viewModel.searchQuery.value = it
+            }
+
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            return false
+        }
+
+    }
 }

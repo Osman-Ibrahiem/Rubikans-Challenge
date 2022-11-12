@@ -32,6 +32,8 @@ class CharactersListViewModel @Inject internal constructor(
     var pageNum: Int = 1
     var hasMore: Boolean = true
 
+    val searchQuery: MutableLiveData<CharSequence?> = MutableLiveData(null)
+
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.d("CharactersListVM", exception.message ?: "Error ")
         _error.postValue(exception)

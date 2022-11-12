@@ -1,6 +1,5 @@
 package com.rubikans.challenge.ui.characterslist.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -19,6 +18,41 @@ class CharacterAdapter @Inject constructor(
     companion object {
         private const val VIEW_TYPE_ITEM = 0
         private const val VIEW_TYPE_FOOTER = 1
+    }
+
+    var filter: CharSequence? = null
+        set(value) {
+            field = value
+            list = fullList.filter {
+                if (value.isNullOrEmpty()) {
+                    true
+                } else {
+                    it.fullName.contains(value, true)
+                }
+            }
+        }
+
+    var fullList: List<Character> = ArrayList()
+        set(value) {
+            field = value
+            list = value.filter {
+                if (filter.isNullOrEmpty()) {
+                    true
+                } else {
+                    it.fullName.contains(filter!!, true)
+                }
+            }
+        }
+
+    fun appendItems(newItems: List<Character>) {
+        fullList = fullList + newItems
+        list = fullList.filter {
+            if (filter.isNullOrEmpty()) {
+                true
+            } else {
+                it.fullName.contains(filter!!, true)
+            }
+        }
     }
 
     private val diffCallback = object : DiffUtil.ItemCallback<Character>() {
