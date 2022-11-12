@@ -11,4 +11,6 @@ interface CharactersCacheDataSource {
 
     suspend fun saveCharacter(character: CharacterEntity)
 
+    suspend fun getCharacter(id: Int): CharacterEntity
+
 }

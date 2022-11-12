@@ -1,6 +1,5 @@
 package com.rubikans.challenge.presentation.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
@@ -25,6 +24,8 @@ abstract class BaseViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
+        cancelCurrentJob()
     }
+
+    protected fun cancelCurrentJob() = job.cancel()
 }

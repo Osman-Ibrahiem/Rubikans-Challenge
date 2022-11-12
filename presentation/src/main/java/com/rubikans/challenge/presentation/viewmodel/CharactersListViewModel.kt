@@ -37,6 +37,7 @@ class CharactersListViewModel @Inject internal constructor(
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.d("CharactersListVM", exception.message ?: "Error ")
         _error.postValue(exception)
+        _loading.postValue(false)
     }
 
     init {

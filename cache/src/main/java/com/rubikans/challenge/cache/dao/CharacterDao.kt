@@ -20,4 +20,7 @@ interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addCharacters(characters: List<CharacterCacheEntity>)
+
+    @Query("SELECT * FROM characters where id == :id")
+    fun getCharacter(id: Int): CharacterCacheEntity
 }
