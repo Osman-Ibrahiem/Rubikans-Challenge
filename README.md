@@ -9,14 +9,18 @@ The Rubikans Challenge App consuming a [Reqres.in API](https://reqres.in/) to di
 - Light/ Dark theme.
 
 ## Screenshots
-<img alt="Screenshot_light_1.png" src="art/screenshots/Screenshot_light_1.png">
-<img alt="Screenshot_light_2.png" src="art/screenshots/Screenshot_light_2.png">
-<img alt="Screenshot_light_3.png" src="art/screenshots/Screenshot_light_3.png">
-<img alt="Screenshot_light_4.png" src="art/screenshots/Screenshot_light_4.png">
-<img alt="Screenshot_dark_1.png" src="art/screenshots/Screenshot_dark_1.png">
-<img alt="Screenshot_dark_2.png" src="art/screenshots/Screenshot_dark_2.png">
-<img alt="Screenshot_dark_3.png" src="art/screenshots/Screenshot_dark_3.png">
-<img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_4.png">
+<p float="left">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_1.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_2.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_3.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_4.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_5.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_1.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_2.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_3.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_4.png" width="200">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_5.png" width="200">
+</p>
 
 ## Architecture
 Uses concepts of the notorious Uncle Bob's architecture called [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html).</br>
