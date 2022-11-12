@@ -21,7 +21,7 @@ class CharactersRemoteDataSourceImp @Inject constructor(
     ): CharactersListEntity {
         val characters = characterService.getCharacters(
             page = page,
-            perPage = pageSize,
+//            perPage = pageSize,
         )
         return characterListEntityMapper.mapFromModel(characters)
     }

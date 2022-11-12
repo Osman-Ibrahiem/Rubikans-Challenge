@@ -12,7 +12,7 @@ interface CharacterService {
     @GET("users")
     suspend fun getCharacters(
         @Query("page") page: Int?,
-        @Query("per_page") perPage: Int?,
+        @Query("per_page") perPage: Int? = null,
     ): PagingRemoteResponse<CharacterRemote>?
 
     @GET("users/{id}")

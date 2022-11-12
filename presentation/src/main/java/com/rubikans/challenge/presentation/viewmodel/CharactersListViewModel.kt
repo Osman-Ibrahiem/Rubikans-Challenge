@@ -18,6 +18,7 @@ class CharactersListViewModel @Inject internal constructor(
 
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: LiveData<Boolean> = _loading
+    val isLoading: Boolean get() = loading.value == true
 
     private val _error = MutableLiveData<Throwable>()
     val error: LiveData<Throwable> = _error
@@ -29,6 +30,7 @@ class CharactersListViewModel @Inject internal constructor(
     val characterList: LiveData<List<Character>> = _characterList
 
     var pageNum: Int = 1
+    var hasMore: Boolean = true
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.d("CharactersListVM", exception.message ?: "Error ")
@@ -38,6 +40,13 @@ class CharactersListViewModel @Inject internal constructor(
     init {
         pageNum = 1
         getCharacters(pageNum)
+    }
+
+    fun nextPage() {
+        pageNum += 1
+        if (hasMore) {
+            getCharacters(pageNum)
+        }
     }
 
     fun getCharacters(page: Int) {
@@ -53,6 +62,7 @@ class CharactersListViewModel @Inject internal constructor(
             _loading.postValue(false)
             _result.postValue(it)
             _characterList.postValue((characterList.value ?: ArrayList()) + it.characters)
+            hasMore = it.page < it.totalPages
         }
     }
 }
