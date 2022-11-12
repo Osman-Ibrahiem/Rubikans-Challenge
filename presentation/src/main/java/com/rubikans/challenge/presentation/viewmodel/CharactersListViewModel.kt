@@ -4,9 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rubikans.challenge.domain.interactor.GetCharactersListUseCase
+import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.domain.model.CharactersList
-import com.rubikans.challenge.presentation.utils.ExceptionHandler
-import com.rubikans.challenge.presentation.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import javax.inject.Inject
@@ -17,15 +16,23 @@ class CharactersListViewModel @Inject internal constructor(
     private val getCharactersListUseCase: GetCharactersListUseCase,
 ) : BaseViewModel() {
 
-    private val _characterList = MutableLiveData<Resource<CharactersList>>()
-    val characterList: LiveData<Resource<CharactersList>> = _characterList
+    private val _loading = MutableLiveData<Boolean>(false)
+    val loading: LiveData<Boolean> = _loading
+
+    private val _error = MutableLiveData<Throwable>()
+    val error: LiveData<Throwable> = _error
+
+    private val _result = MutableLiveData<CharactersList>()
+    val result: LiveData<CharactersList> = _result
+
+    private val _characterList = MutableLiveData<List<Character>>(ArrayList())
+    val characterList: LiveData<List<Character>> = _characterList
 
     var pageNum: Int = 1
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.d("CharactersListVM", exception.message ?: "Error ")
-        val message = ExceptionHandler.parse(exception)
-        _characterList.postValue(Resource.error(exception.message ?: "Error"))
+        _error.postValue(exception)
     }
 
     init {
@@ -34,7 +41,7 @@ class CharactersListViewModel @Inject internal constructor(
     }
 
     fun getCharacters(page: Int) {
-        _characterList.postValue(Resource.loading(null))
+        _loading.postValue(true)
         launchCoroutineIO {
             loadCharacters(page)
         }
@@ -43,7 +50,9 @@ class CharactersListViewModel @Inject internal constructor(
     private suspend fun loadCharacters(page: Int) {
         getCharactersListUseCase(page).collect {
             Log.d("CharactersListVM", it.toString())
-            _characterList.postValue(Resource.success(it))
+            _loading.postValue(false)
+            _result.postValue(it)
+            _characterList.postValue((characterList.value ?: ArrayList()) + it.characters)
         }
     }
 }

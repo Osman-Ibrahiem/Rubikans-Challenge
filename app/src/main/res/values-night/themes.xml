@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+        <item name="android:colorBackground">@color/color_background_dark</item>
         <item name="materialCardViewStyle">@style/CardView.Dark</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.Headline2</item>

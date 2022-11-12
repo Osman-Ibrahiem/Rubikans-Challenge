@@ -8,9 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rubikans.challenge.R
 import com.rubikans.challenge.databinding.FragmentCharacterListBinding
-import com.rubikans.challenge.domain.model.CharactersList
-import com.rubikans.challenge.extension.observe
-import com.rubikans.challenge.presentation.utils.Resource
+import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.presentation.viewmodel.CharactersListViewModel
 import com.rubikans.challenge.ui.adapters.CharacterAdapter
 import com.rubikans.challenge.ui.base.BaseFragment
@@ -31,13 +29,14 @@ class CharacterListFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observe(viewModel.characterList, ::onViewStateChange)
         initRecyclerView()
         characterAdapter.setItemClickListener { character ->
             findNavController().navigate(CharacterListFragmentDirections.actionToCharacterDetails(
                 characterId = character.id
             ))
         }
+
+        observeResults()
     }
 
     private fun initRecyclerView() = viewBinding.recyclerViewCharacters.apply {
@@ -45,27 +44,23 @@ class CharacterListFragment :
         layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun onViewStateChange(result: Resource<CharactersList>) {
-        when (result.status) {
-            Resource.Status.SUCCESS -> {
-                handleLoading(false)
-                viewBinding.recyclerViewCharacters.isVisible = true
-                characterAdapter.list = result.data?.characters ?: ArrayList()
-            }
-            Resource.Status.ERROR -> {
-                val error = result.message ?: "Error"
-                Timber.e(error)
-                handleErrorMessage(error)
-                viewBinding.recyclerViewCharacters.isVisible = false
-            }
-            Resource.Status.INIT -> {
-                viewBinding.recyclerViewCharacters.isVisible = false
-                handleLoading(false)
-            }
-            Resource.Status.LOADING -> {
-                viewBinding.recyclerViewCharacters.isVisible = false
-                handleLoading(true)
-            }
+    private fun observeResults() {
+        viewModel.loading.observe(viewLifecycleOwner) { loading: Boolean? ->
+            handleLoading(loading == true)
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { throwable: Throwable? ->
+            throwable ?: return@observe
+
+            val error = throwable.message ?: "Error"
+            Timber.e(error)
+            handleErrorMessage(error)
+            viewBinding.recyclerViewCharacters.isVisible = false
+        }
+
+        viewModel.characterList.observe(viewLifecycleOwner) { characters: List<Character>? ->
+            viewBinding.recyclerViewCharacters.isVisible = true
+            characterAdapter.list = characters ?: ArrayList()
         }
     }
 

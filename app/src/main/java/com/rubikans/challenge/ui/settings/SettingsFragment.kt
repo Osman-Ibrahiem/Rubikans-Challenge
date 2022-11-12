@@ -8,8 +8,6 @@ import com.rubikans.challenge.R
 import com.rubikans.challenge.core.theme.ThemeUtils
 import com.rubikans.challenge.databinding.FragmentSettingsBinding
 import com.rubikans.challenge.domain.model.Settings
-import com.rubikans.challenge.extension.observe
-import com.rubikans.challenge.presentation.utils.Resource
 import com.rubikans.challenge.presentation.viewmodel.SettingsViewModel
 import com.rubikans.challenge.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,10 +28,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observe(viewModel.settings, ::onViewStateChange)
-        observe(viewModel.nightMode, ::onViewStateChangeNightMode)
         setupRecyclerView()
         viewModel.getSettings()
+        observeResult()
     }
 
     private fun setupRecyclerView() {
@@ -47,37 +44,27 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel
         }
     }
 
-    private fun onViewStateChange(result: Resource<List<Settings>>) {
-        when (result.status) {
-            Resource.Status.SUCCESS -> {
-                handleLoading(false)
-                result.data?.let {
-                    settingsAdapter.list = it
-                }
-            }
-            Resource.Status.ERROR -> {
-                val error = result.message ?: "Error"
-                Timber.e(error)
-                handleErrorMessage(error)
-            }
-            Resource.Status.LOADING -> {
-                handleLoading(true)
-            }
-            Resource.Status.INIT -> {
-                handleLoading(false)
-            }
+    private fun observeResult() {
+        viewModel.loading.observe(viewLifecycleOwner) { loading: Boolean? ->
+            handleLoading(loading == true)
         }
-    }
 
-    private fun onViewStateChangeNightMode(result: Resource<Boolean>) {
-        when (result.status) {
-            Resource.Status.SUCCESS -> {
-                result.data?.let {
-                    themeUtils.setNightMode(it)
-                }
-            }
-            else -> {
-            }
+        viewModel.error.observe(viewLifecycleOwner) { throwable: Throwable? ->
+            throwable ?: return@observe
+
+            val error = throwable.message ?: "Error"
+            Timber.e(error)
+            handleErrorMessage(error)
+        }
+
+        viewModel.settings.observe(viewLifecycleOwner) { settings: List<Settings>? ->
+            settingsAdapter.list = settings ?: ArrayList()
+        }
+
+        viewModel.nightMode.observe(viewLifecycleOwner) { isNightMode: Boolean? ->
+            isNightMode ?: return@observe
+
+            themeUtils.setNightMode(requireActivity(), isNightMode)
         }
     }
 

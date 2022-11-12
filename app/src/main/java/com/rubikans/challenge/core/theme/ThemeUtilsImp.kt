@@ -3,6 +3,8 @@ package com.rubikans.challenge.core.theme
 import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.FragmentActivity
+import com.rubikans.challenge.R
 import javax.inject.Inject
 
 class ThemeUtilsImp @Inject constructor() : ThemeUtils {
@@ -11,6 +13,12 @@ class ThemeUtilsImp @Inject constructor() : ThemeUtils {
             Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 
     override fun isLightTheme(context: Context) = !isDarkTheme(context)
+
+    override fun setNightMode(activity: FragmentActivity, nightMode: Boolean) {
+        setNightMode(nightMode)
+        activity.window?.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+//        activity.recreate()
+    }
 
     override fun setNightMode(nightMode: Boolean) {
         AppCompatDelegate.setDefaultNightMode(
