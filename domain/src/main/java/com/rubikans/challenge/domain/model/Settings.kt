@@ -13,3 +13,7 @@ enum class SettingType {
     TEXT,
     EMPTY
 }
+
+const val ID_SETTINGS_THEME = 1
+const val ID_SETTINGS_CLEAR_CACHE = 2
+const val ID_SETTINGS_VERSION = 3

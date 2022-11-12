@@ -20,4 +20,7 @@ open class PreferencesHelper @Inject constructor(
         get() = preferences.getBoolean(PREF_KEY_NIGHT_MODE, false)
         set(isDarkMode) = preferences.edit().putBoolean(PREF_KEY_NIGHT_MODE, isDarkMode).apply()
 
+    fun clear() {
+        preferences.edit().clear().apply()
+    }
 }

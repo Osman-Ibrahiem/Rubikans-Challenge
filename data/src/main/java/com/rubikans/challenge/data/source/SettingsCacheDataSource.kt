@@ -5,4 +5,5 @@ interface SettingsCacheDataSource {
     var isNight: Boolean
     val versionName: String
 
+    fun clearCache()
 }

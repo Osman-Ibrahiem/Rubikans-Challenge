@@ -8,4 +8,6 @@ interface SettingsRepository {
     suspend fun getSettings(): Flow<List<Settings>>
 
     var isNight: Boolean
+
+    fun clearCache()
 }

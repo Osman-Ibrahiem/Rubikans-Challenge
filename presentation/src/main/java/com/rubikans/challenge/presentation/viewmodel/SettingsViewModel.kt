@@ -3,8 +3,11 @@ package com.rubikans.challenge.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.rubikans.challenge.domain.interactor.ClearCacheUseCase
 import com.rubikans.challenge.domain.interactor.GetSettingsUseCase
 import com.rubikans.challenge.domain.interactor.SetDarkModeUseCase
+import com.rubikans.challenge.domain.model.ID_SETTINGS_CLEAR_CACHE
+import com.rubikans.challenge.domain.model.ID_SETTINGS_THEME
 import com.rubikans.challenge.domain.model.Settings
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -14,6 +17,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val getSettingsUseCase: GetSettingsUseCase,
     private val setDarkModeUseCase: SetDarkModeUseCase,
+    private val clearCacheUseCase: ClearCacheUseCase,
 ) : BaseViewModel() {
 
     private val _loading = MutableLiveData<Boolean>(false)
@@ -51,7 +55,11 @@ class SettingsViewModel @Inject constructor(
     fun setSettings(selectedSetting: Settings) {
         selectedSetting.run {
             launchCoroutineIO {
-                setDarkMode(selectedValue)
+                when (selectedSetting.id) {
+                    ID_SETTINGS_THEME -> setDarkMode(selectedValue)
+                    ID_SETTINGS_CLEAR_CACHE -> clearCache()
+                }
+
                 loadSettings()
             }
             _nightMode.postValue(selectedValue)
@@ -61,5 +69,9 @@ class SettingsViewModel @Inject constructor(
 
     private suspend fun setDarkMode(isDark: Boolean) {
         setDarkModeUseCase(isDark)
+    }
+
+    private suspend fun clearCache() {
+        clearCacheUseCase(Unit)
     }
 }
