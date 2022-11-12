@@ -50,6 +50,9 @@ ext {
     // Room
     roomVersion = '2.4.3'
 
+    // Expanded Layout
+    expandedLayoutVersion = '2.9.2'
+
     // Common dependencies
     kotlinDependencies = [
             coreKtx: "androidx.core:core-ktx:$coreKtxVersion",
@@ -110,6 +113,7 @@ ext {
             fragmentKtx          : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
             sdp                  : sdpSspDependencies.sdp,
             ssp                  : sdpSspDependencies.ssp,
+            expandedLayout        : "com.github.cachapa:ExpandableLayout:$expandedLayoutVersion",
             // Dagger-Hilt
             daggerHilt           : [hiltDependencies.hiltAndroid,
 //                                    hiltDependencies.hiltViewModel,

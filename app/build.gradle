@@ -82,4 +82,6 @@ dependencies {
     kapt uiModuleDependencies.roomKapt
     // Timber
     implementation uiModuleDependencies.timber
+    // Expanded Layout
+    implementation uiModuleDependencies.expandedLayout
 }

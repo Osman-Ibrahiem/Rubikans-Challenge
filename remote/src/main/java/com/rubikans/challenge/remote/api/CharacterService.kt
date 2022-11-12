@@ -3,7 +3,11 @@ package com.rubikans.challenge.remote.api
 import com.rubikans.challenge.remote.models.CharacterRemote
 import com.rubikans.challenge.remote.models.GRemoteResponse
 import com.rubikans.challenge.remote.models.PagingRemoteResponse
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.PUT
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface CharacterService {
 
@@ -22,5 +26,5 @@ interface CharacterService {
     suspend fun updateCharacter(
         @Path("id") id: Int,
         @Body request: CharacterRemote?,
-    ): GRemoteResponse<CharacterRemote>?
+    ): CharacterRemote?
 }

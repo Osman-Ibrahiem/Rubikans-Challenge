@@ -29,6 +29,7 @@ class CharacterDetailViewModel @Inject constructor(
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.d("CharacterDetailVM", exception.message ?: "Error ")
         _error.postValue(exception)
+        _loading.postValue(false)
     }
 
     fun getCharacterDetail(characterId: Int) {

@@ -36,7 +36,7 @@ class CharactersRemoteDataSourceImp @Inject constructor(
         val character: CharacterRemote = characterService.updateCharacter(
             id = newCharacter.id,
             request = characterEntityMapper.mapToModel(newCharacter)
-        )?.data ?: throw Throwable("No Character founded")
+        ) ?: throw Throwable("No Character founded")
         return characterEntityMapper.mapFromModel(character)
     }
 }
