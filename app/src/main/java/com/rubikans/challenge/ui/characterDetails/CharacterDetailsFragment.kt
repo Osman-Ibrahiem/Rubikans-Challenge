@@ -1,43 +1,31 @@
 package com.rubikans.challenge.ui.characterDetails
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.RequestManager
+import com.rubikans.challenge.R
 import com.rubikans.challenge.databinding.FragmentCharacterDetailsBinding
 import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.extension.observe
-import com.rubikans.challenge.extension.showSnackBar
 import com.rubikans.challenge.presentation.utils.Resource
 import com.rubikans.challenge.presentation.viewmodel.CharacterDetailViewModel
+import com.rubikans.challenge.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CharacterDetailsFragment : Fragment() {
+class CharacterDetailsFragment :
+    BaseFragment<FragmentCharacterDetailsBinding, CharacterDetailViewModel>() {
 
-    private var _binding: FragmentCharacterDetailsBinding? = null
-    private val binding get() = _binding!!
+    override val layoutId: Int = R.layout.fragment_character_details
+    override val viewModel: CharacterDetailViewModel by viewModels()
     private val args: CharacterDetailsFragmentArgs by navArgs()
-
-    private val viewModel: CharacterDetailViewModel by viewModels()
 
     @Inject
     lateinit var glide: RequestManager
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,9 +36,11 @@ class CharacterDetailsFragment : Fragment() {
     private fun onViewStateChange(result: Resource<Character>) {
         when (result.status) {
             Resource.Status.SUCCESS -> {
+                handleLoading(false)
                 result.data?.let {
-                    binding.apply {
+                    viewBinding.apply {
                         textViewCharacterName.text = it.fullName
+                        textViewCharacterEmail.text = it.email
                         glide.load(it.avatar).into(imageViewCharacter)
                     }
                 }
@@ -58,21 +48,15 @@ class CharacterDetailsFragment : Fragment() {
             Resource.Status.ERROR -> {
                 val error = result.message ?: "Error"
                 Timber.e(error)
-                showSnackBar(binding.rootView, error, true)
+                handleErrorMessage(error)
             }
             Resource.Status.INIT -> {
 
             }
             Resource.Status.LOADING -> {
-
+                handleLoading(true)
             }
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
 }

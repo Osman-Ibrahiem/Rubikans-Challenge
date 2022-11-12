@@ -1,45 +1,32 @@
 package com.rubikans.challenge.ui.settings
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rubikans.challenge.R
 import com.rubikans.challenge.core.theme.ThemeUtils
 import com.rubikans.challenge.databinding.FragmentSettingsBinding
 import com.rubikans.challenge.domain.model.Settings
 import com.rubikans.challenge.extension.observe
-import com.rubikans.challenge.extension.showSnackBar
 import com.rubikans.challenge.presentation.utils.Resource
 import com.rubikans.challenge.presentation.viewmodel.SettingsViewModel
+import com.rubikans.challenge.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
 
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: SettingsViewModel by viewModels()
+    override val layoutId: Int = R.layout.fragment_settings
+    override val viewModel: SettingsViewModel by viewModels()
 
     @Inject
     lateinit var settingsAdapter: SettingsAdapter
 
     @Inject
     lateinit var themeUtils: ThemeUtils
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +37,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerViewSettings.apply {
+        viewBinding.recyclerViewSettings.apply {
             adapter = settingsAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
@@ -63,6 +50,7 @@ class SettingsFragment : Fragment() {
     private fun onViewStateChange(result: Resource<List<Settings>>) {
         when (result.status) {
             Resource.Status.SUCCESS -> {
+                handleLoading(false)
                 result.data?.let {
                     settingsAdapter.list = it
                 }
@@ -70,13 +58,13 @@ class SettingsFragment : Fragment() {
             Resource.Status.ERROR -> {
                 val error = result.message ?: "Error"
                 Timber.e(error)
-                showSnackBar(binding.rootView, error)
+                handleErrorMessage(error)
             }
             Resource.Status.LOADING -> {
-
+                handleLoading(true)
             }
             Resource.Status.INIT -> {
-
+                handleLoading(false)
             }
         }
     }
@@ -93,8 +81,4 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
