@@ -14,6 +14,9 @@
     <color name="colorBackgroundDark">#24292E</color>
     <color name="colorCardDark">#3B3E43</color>
     <color name="colorTextLight">#30353A</color>
+    <color name="gradient_end">#2B438E</color>
+    <color name="gradient_center">#4C3C7C</color>
+    <color name="gradient_start">#583A75</color>
 
 
 </resources>
