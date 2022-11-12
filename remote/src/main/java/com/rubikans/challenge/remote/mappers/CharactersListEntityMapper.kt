@@ -21,4 +21,13 @@ class CharactersListEntityMapper @Inject constructor(
         )
     }
 
+    override fun mapToModel(entity: CharactersListEntity?): PagingRemoteResponse<CharacterRemote> {
+        return PagingRemoteResponse<CharacterRemote>().apply {
+            page = entity?.page
+            perPage = entity?.perPage
+            total = entity?.total
+            totalPages = entity?.totalPages
+            data = entity?.characters?.map(characterMapper::mapToModel)
+        }
+    }
 }

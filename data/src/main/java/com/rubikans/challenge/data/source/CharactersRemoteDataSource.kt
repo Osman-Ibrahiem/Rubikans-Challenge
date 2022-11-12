@@ -13,4 +13,8 @@ interface CharactersRemoteDataSource {
     suspend fun getCharacter(
         id: Int,
     ): CharacterEntity
+
+    suspend fun updateCharacter(
+        newCharacter: CharacterEntity,
+    ): CharacterEntity
 }

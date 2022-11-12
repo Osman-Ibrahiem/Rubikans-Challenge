@@ -31,4 +31,12 @@ class CharacterRepositoryImp @Inject constructor(
             emit(characterMapper.mapFromEntity(character))
         }
     }
+
+    override suspend fun updateCharacter(newCharacter: Character): Flow<Character> = flow {
+        remoteDataSource.updateCharacter(characterMapper.mapToEntity(newCharacter))
+            .let { character ->
+                cacheDataSource.saveCharacter(character)
+                emit(characterMapper.mapFromEntity(character))
+            }
+    }
 }

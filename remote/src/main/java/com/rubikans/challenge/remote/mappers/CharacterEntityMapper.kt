@@ -19,4 +19,13 @@ class CharacterEntityMapper @Inject constructor(
         )
     }
 
+    override fun mapToModel(entity: CharacterEntity?): CharacterRemote {
+        return CharacterRemote(
+            id = entity?.id,
+            email = entity?.email,
+            firstName = entity?.firstName,
+            lastName = entity?.lastName,
+            avatar = entity?.avatar,
+        )
+    }
 }
