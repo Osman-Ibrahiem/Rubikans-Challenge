@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.RequestManager
 import com.rubikans.challenge.R
 import com.rubikans.challenge.databinding.FragmentCharacterDetailsBinding
 import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.presentation.viewmodel.CharacterDetailViewModel
 import com.rubikans.challenge.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CharacterDetailsFragment :
@@ -20,9 +18,6 @@ class CharacterDetailsFragment :
     override val layoutId: Int = R.layout.fragment_character_details
     override val viewModel: CharacterDetailViewModel by viewModels()
     private val args: CharacterDetailsFragmentArgs by navArgs()
-
-    @Inject
-    lateinit var glide: RequestManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,11 +37,7 @@ class CharacterDetailsFragment :
 
         viewModel.character.observe(viewLifecycleOwner) { character: Character? ->
             character ?: return@observe
-            viewBinding.apply {
-                textViewCharacterName.text = character.fullName
-                textViewCharacterEmail.text = character.email
-                glide.load(character.avatar).into(imageViewCharacter)
-            }
+            viewBinding.item = character
         }
     }
 

@@ -1,4 +1,4 @@
-package com.rubikans.challenge.ui.settings
+package com.rubikans.challenge.ui.settings.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

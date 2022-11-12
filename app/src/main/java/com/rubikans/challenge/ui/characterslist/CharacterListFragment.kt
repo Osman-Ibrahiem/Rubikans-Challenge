@@ -10,7 +10,7 @@ import com.rubikans.challenge.R
 import com.rubikans.challenge.databinding.FragmentCharacterListBinding
 import com.rubikans.challenge.domain.model.Character
 import com.rubikans.challenge.presentation.viewmodel.CharactersListViewModel
-import com.rubikans.challenge.ui.adapters.CharacterAdapter
+import com.rubikans.challenge.ui.characterslist.adapters.CharacterAdapter
 import com.rubikans.challenge.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

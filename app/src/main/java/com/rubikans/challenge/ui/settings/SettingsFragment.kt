@@ -10,6 +10,7 @@ import com.rubikans.challenge.databinding.FragmentSettingsBinding
 import com.rubikans.challenge.domain.model.Settings
 import com.rubikans.challenge.presentation.viewmodel.SettingsViewModel
 import com.rubikans.challenge.ui.base.BaseFragment
+import com.rubikans.challenge.ui.settings.adapters.SettingsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject

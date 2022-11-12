@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.rubikans.challenge.domain.model.Character" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rootView"
         android:layout_width="match_parent"
@@ -27,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                app:loadImage="@{item.avatar}"
                 tools:src="@tools:sample/avatars" />
 
         </com.google.android.material.card.MaterialCardView>
@@ -53,6 +61,7 @@
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:gravity="center"
+                    android:text="@{item.fullName}"
                     android:textAlignment="center"
                     android:textAppearance="?attr/textAppearanceHeadline3"
                     android:textStyle="bold"
@@ -69,6 +78,7 @@
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:layout_marginBottom="@dimen/_16sdp"
                     android:gravity="center"
+                    android:text="@{item.email}"
                     android:textAlignment="center"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textStyle="bold"
