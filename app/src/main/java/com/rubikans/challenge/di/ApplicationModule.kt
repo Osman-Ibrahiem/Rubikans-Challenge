@@ -12,6 +12,7 @@ import com.rubikans.challenge.core.theme.ThemeUtilsImp
 import com.rubikans.challenge.di.annotations.qualifiers.AppBuildType
 import com.rubikans.challenge.di.annotations.qualifiers.AppContext
 import com.rubikans.challenge.di.annotations.qualifiers.AppRemoteUrl
+import com.rubikans.challenge.di.annotations.qualifiers.AppVersionName
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,6 +40,12 @@ class ApplicationModule {
     @Provides
     fun provideBuildType(): Boolean {
         return BuildConfig.DEBUG
+    }
+
+    @AppVersionName
+    @Provides
+    fun provideVersionName(): String {
+        return BuildConfig.VERSION_NAME
     }
 
     @Singleton
