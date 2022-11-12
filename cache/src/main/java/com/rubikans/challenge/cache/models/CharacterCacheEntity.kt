@@ -3,9 +3,8 @@ package com.rubikans.challenge.cache.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.rubikans.challenge.cache.utils.CacheConstants
 
-@Entity(tableName = CacheConstants.CHARACTER_TABLE_NAME)
+@Entity(tableName = "characters")
 data class CharacterCacheEntity(
     @PrimaryKey
     @SerializedName("id")

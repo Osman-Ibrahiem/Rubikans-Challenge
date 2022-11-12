@@ -23,11 +23,15 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "BASE_URL", '"https://reqres.in"'
+            buildConfigField "String", "DATABASE_NAME", '"com.rubikans.challenge.database"'
+            buildConfigField "String", "PREFERENCES_NAME", '"com.rubikans.challenge.preferences"'
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_URL", '"https://reqres.in"'
+            buildConfigField "String", "DATABASE_NAME", '"com.rubikans.challenge.database"'
+            buildConfigField "String", "PREFERENCES_NAME", '"com.rubikans.challenge.preferences"'
         }
     }
     compileOptions {

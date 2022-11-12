@@ -1,9 +1,10 @@
 package com.rubikans.challenge.di.cache
 
 import android.content.Context
+import androidx.room.Room
 import com.rubikans.challenge.cache.database.CharactersDataBase
-import com.rubikans.challenge.cache.utils.CachePreferencesHelper
 import com.rubikans.challenge.di.annotations.qualifiers.AppContext
+import com.rubikans.challenge.di.annotations.qualifiers.AppDatabaseName
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,15 +19,9 @@ object DataBaseModule {
     @Singleton
     fun provideCharactersDataBase(
         @AppContext context: Context,
+        @AppDatabaseName databaseName: String,
     ): CharactersDataBase {
-        return CharactersDataBase.getInstance(context)
+        return Room.databaseBuilder(context, CharactersDataBase::class.java, databaseName).build()
     }
 
-    @Provides
-    @Singleton
-    fun providePreferenceHelper(
-        @AppContext context: Context,
-    ): CachePreferencesHelper {
-        return CachePreferencesHelper(context)
-    }
 }
