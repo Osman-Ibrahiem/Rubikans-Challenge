@@ -10,16 +10,16 @@ The Rubikans Challenge App consuming a [Reqres.in API](https://reqres.in/) to di
 
 ## Screenshots
 <p float="left">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_1.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_2.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_3.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_4.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_5.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_1.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_2.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_3.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_4.png" width="170">
-  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_5.png" width="170">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_1.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_2.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_3.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_4.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_light_5.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_1.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_2.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_3.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_4.png" width="160">
+  <img alt="Screenshot_dark_4.png" src="art/screenshots/Screenshot_dark_5.png" width="160">
 </p>
 
 ## Architecture
